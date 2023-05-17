@@ -1,3 +1,7 @@
+use std::fs::File;
+use std::io::prelude::*;
+use std::io::BufReader;
+
 enum Format {
     Naive,
     Advanced(Params),
@@ -9,8 +13,14 @@ struct Params {
 }
 
 fn main() {
-    let text = std::env::args().nth(1).expect("Usage: <binary> TEXT");
-    let formatted = format_k(text, Format::Naive);
+    // let text = std::env::args().nth(1).expect("Usage: <binary> TEXT");
+    let file = std::env::args().nth(1).expect("Usage: <binary> TEXT");
+    let file = File::open(file).unwrap();
+    let mut buf_reader = BufReader::new(file);
+    let mut contents = String::new();
+    buf_reader.read_to_string(&mut contents).unwrap();
+
+    let formatted = format_k(contents, Format::Naive);
     println!("{}", formatted);
 }
 
