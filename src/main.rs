@@ -32,13 +32,13 @@ fn naive_format(text: String) -> String {
             level += 1;
             out.push('\n');
             // (0..level).for_each(|_| out.push('\t'));
-            (0..level).for_each(|_| out.push_str("      "));
+            (0..level).for_each(|_| out.push_str("    "));
 
             continue;
         } else if c == ')' {
             level -= 1;
             out.push('\n');
-            (0..level).for_each(|_| out.push_str("      "));
+            (0..level).for_each(|_| out.push_str("    "));
         }
 
         out.push(c);
